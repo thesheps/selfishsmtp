@@ -1,4 +1,5 @@
-﻿using MailKit.Security;
+﻿using System.Collections.Generic;
+using MailKit.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MimeKit;
 
@@ -27,13 +28,11 @@ namespace SelfishSmtp.Tests
                     From = { new MailboxAddress("test-from@test.com") }
                 });
 
-                var messages = server.GetMessages();
-
-                Assert.AreEqual("test-recipient@test.com", messages.To);
-                Assert.AreEqual("test-from@test.com", messages.From);
-                Assert.AreEqual("test-sender@test.com", messages.Sender);
-                Assert.AreEqual("This is a test email", messages.Body);
-                Assert.AreEqual("This is a test subject", messages.Subject);
+                Assert.AreEqual("test-recipient@test.com", server.Messages[0].To);
+                Assert.AreEqual("test-from@test.com", server.Messages[0].From);
+                Assert.AreEqual("test-sender@test.com", server.Messages[0].Sender);
+                Assert.AreEqual("This is a test email", server.Messages[0].Body);
+                Assert.AreEqual("This is a test subject", server.Messages[0].Subject);
             }
         }
     }
