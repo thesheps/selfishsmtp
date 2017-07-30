@@ -8,7 +8,7 @@ Does exactly that.
 [Test]
 public void WhenIDoAThing_ThenAnEmailIsSent() 
 {
-  using(var smtpServer = new SmtpServer(25)
+  using(var smtpServer = new SmtpServer(25))
   {
     var thingerer = new Thinger();
     thingerer.SendEmail("from@place.com", "to@otherplace.com", "This is an email!");
